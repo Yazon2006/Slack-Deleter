@@ -21,6 +21,7 @@ public class SlackDeleter {
 
         Observable.just(wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("file_listing_bottom_button"))))
                 .subscribe((webElement) -> {
+                    waitForJsListener();
                     driver.get(webElement.getAttribute("href"));
                 }, SlackDeleter::handleError);
 
@@ -32,9 +33,7 @@ public class SlackDeleter {
     private static void waitAndClick(By by) {
         Observable.just(wait.until(ExpectedConditions.visibilityOfElementLocated(by)))
                 .subscribe((webElement) -> {
-                    if (Properties.getInstance().getBrowser().equals(Properties.Browsers.CHROME)) {
-                        waitForJsListener();
-                    }
+                    waitForJsListener();
                     webElement.click();
                 }, SlackDeleter::handleError);
     }
@@ -52,10 +51,12 @@ public class SlackDeleter {
     }
 
     private static void waitForJsListener() {
-        try {
-            Thread.sleep(6000);                 //1000 milliseconds is one second.
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
+        if (Properties.getInstance().getBrowser().equals(Properties.Browsers.CHROME)) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
         }
     }
 
