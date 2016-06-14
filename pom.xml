@@ -6,7 +6,7 @@
 
     <groupId>slack</groupId>
     <artifactId>deleter</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <dependencies>
         <!-- http://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
