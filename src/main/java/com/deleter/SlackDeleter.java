@@ -3,17 +3,17 @@ package com.deleter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import rx.Observable;
 
 public class SlackDeleter {
 
-    private static WebDriver driver = new FirefoxDriver();
+    private static WebDriver driver = DriverFactory.getDriver();
     private static WebDriverWait wait = new WebDriverWait(driver, 36000);
 
     public static void main(String[] args) {
+//        setupWebDriver();
 
         String url = "https://jelvix.slack.com/";
 
@@ -31,6 +31,26 @@ public class SlackDeleter {
             deleteFile();
         }
     }
+
+//    private static void setupWebDriver() {
+//        try {
+//            driver = new ChromeDriver();
+//        } catch (Exception e1) {
+//            System.out.println("There are no ChromeDriver");
+//            try {
+//                driver = new OperaDriver();
+//            } catch (Exception e2) {
+//                System.out.println("There are no OperaDriver");
+//                try {
+//                    driver = new FirefoxDriver();
+//                } catch (Exception e3) {
+//                    System.out.println("There are no FirefoxDriver");
+//                    return;
+//                }
+//            }
+//        }
+//
+//    }
 
     private static void waitAndClick(By by) {
         Observable.just(wait.until(ExpectedConditions.visibilityOfElementLocated(by)))
